@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Processed CSV
+{% endblock %}
+
+{% block body %}
+    <div class="text-center">
+        <h1>Processed CSV</h1>
+        <div class="container">
+            <table class="m-auto table">
+                <thead>
+                <tr>
+                    <th></th>
+                    {% for day in days %}
+                        <th>{{ day }}</th>
+                    {% endfor %}
+                </tr>
+                </thead>
+                <tbody>
+                {% for option in ['Always', 'Sometimes', 'Never'] %}
+                    <tr>
+                        <th>{{ option }}</th>
+                        {% for day in days %}
+                            <td>
+                                <table>
+                                    {% for device_type, device_count in main_data[day][option].items() %}
+                                        <tr>
+                                            <th style="text-align: right">{{ device_type }}:</th>
+                                            <td>{{ main_data[day][option][device_type] }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </table>
+                            </td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
