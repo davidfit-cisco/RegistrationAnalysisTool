@@ -30,4 +30,4 @@ def transform_csv(app):
         else:
             flash(f"Filetype {file_to_upload.content_type} not allowed")
             flash(f"Allowed filetypes are: {', '.join(list(ALLOWED_EXTENSIONS))}")
-    return render_template('upload.html')
+    return render_template('homepage.html')

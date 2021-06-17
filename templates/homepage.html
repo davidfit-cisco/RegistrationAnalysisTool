@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block title %}
-    Upload CSV
+    Process CSV
 {% endblock %}
 
 {% block body %}
@@ -17,7 +17,7 @@
     {% endwith %}
     <form method=post enctype=multipart/form-data>
         <input type=file name=file_to_upload>
-        <input type=submit value=Upload>
+        <input type=submit value=Process>
     </form>
 </div>
 {% endblock %}
