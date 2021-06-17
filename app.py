@@ -18,6 +18,11 @@ def uploadfile():
     return transform_csv(app)
 
 
+@app.route('/test')
+def test():
+    return render_template("test.html")
+
+
 if __name__ == '__main__':
     # app.wsgi_app = LoggingMiddleware(app.wsgi_app)
     app.run(debug=True)

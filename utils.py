@@ -19,7 +19,7 @@ def is_unregistered(cell):
     return False if re.search(r'REG|AGE', cell, re.IGNORECASE) else True
 
 
-def add_date_to_main_data(index, cell, main_data):
+def add_date_to_data(index, cell, main_data):
     daily_data = {
         "Always": {},
         "Sometimes": {},
@@ -50,7 +50,11 @@ class LoggingMiddleware(object):
         return self._app(env, log_response)
 
 
-def should_process_row(closed_stores, column_indexes, row):
+def is_open_dg_store(closed_stores, column_indexes, row):
     return "lab" not in row[column_indexes["name1"]].lower() \
            and "Dollar General" in row[column_indexes["name2"]] \
            and row[column_indexes["name1"]] not in closed_stores
+
+
+def is_tcp_store(tcp_stores, column_indexes, row):
+    return row[column_indexes["name1"]] in tcp_stores

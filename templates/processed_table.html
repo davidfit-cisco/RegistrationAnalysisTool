@@ -1,0 +1,33 @@
+<div class="text-center">
+    <div class="container">
+        <table class="table">
+            <thead>
+            <tr>
+                <th></th>
+                {% for day in days %}
+                    <th class="align-content-center">{{ day }}</th>
+                {% endfor %}
+            </tr>
+            </thead>
+            <tbody>
+            {% for option in ['Always', 'Sometimes', 'Never'] %}
+                <tr>
+                    <th>{{ option }}</th>
+                    {% for day in days %}
+                        <td>
+                            <table>
+                                {% for device_type, device_count in data[day][option].items() %}
+                                    <tr>
+                                        <th style="text-align: right">{{ device_type }}:&nbsp;</th>
+                                        <td>{{ data[day][option][device_type] }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </table>
+                        </td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
