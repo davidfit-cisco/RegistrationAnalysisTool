@@ -14,6 +14,7 @@
                 <tr>
                     <th>{{ option }}</th>
                     {% for day in days %}
+                        {% set total = namespace(value=0) %}
                         <td>
                             <table>
                                 {% for device_type, device_count in data[day][option].items() %}
@@ -21,7 +22,12 @@
                                         <th style="text-align: right">{{ device_type }}:&nbsp;</th>
                                         <td>{{ data[day][option][device_type] }}</td>
                                     </tr>
+                                    {% set total.value = total.value + device_count %}
                                 {% endfor %}
+                                <tr>
+                                    <th style="text-align: right">Total:&nbsp;</th>
+                                    <td>{{ total.value }}</td>
+                                </tr>
                             </table>
                         </td>
                     {% endfor %}
