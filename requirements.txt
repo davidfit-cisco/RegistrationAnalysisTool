@@ -1,3 +1,4 @@
+chardet==4.0.0
 click==8.0.1
 colorama==0.4.4
 et-xmlfile==1.1.0
@@ -19,4 +20,3 @@ six==1.16.0
 SQLAlchemy==1.4.17
 webassets==2.0
 Werkzeug==2.0.1
-

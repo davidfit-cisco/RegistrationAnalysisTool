@@ -21,7 +21,7 @@ def process_csv(file_contents):
 
             if is_tcp_store(tcp_stores, column_indexes, row):
                 process_row(row, column_indexes, tcp_data)
-                
+
     return render_template('processed.html', main_data=main_data, tcp_data=tcp_data, days=list(main_data.keys()))
 
 
