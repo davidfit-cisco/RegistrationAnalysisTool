@@ -10,7 +10,7 @@ def create_app():
         from db.db import init_db
         import routes  # Contrary to PEP, this import here is vital
         init_db()
-    register_assets(reg_state_app)
+        register_assets()
     return reg_state_app
 
 
