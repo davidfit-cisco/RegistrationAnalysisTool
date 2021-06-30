@@ -7,9 +7,9 @@ def create_app():
     reg_state_app = Flask(__name__)
     reg_state_app.secret_key = 'secret'
     with reg_state_app.app_context():
-        from db.db import init_db
         import routes  # Contrary to PEP, this import here is vital
-        init_db()
+        # from db.db import init_db
+        # init_db()
         register_assets()
     return reg_state_app
 
