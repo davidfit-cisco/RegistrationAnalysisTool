@@ -28,11 +28,27 @@
                                     <th style="text-align: right">Total:&nbsp;</th>
                                     <td>{{ total.value }}</td>
                                 </tr>
+                                {% if tcp is defined and option == "Never" %}
+                                    <tr>
+                                        <th style="text-align: right">Never Registered SPA MACS:&nbsp;</th>
+                                        <td>
+                                            <table>
+                                                {% for mac in tcp_never_macs[day] %}
+                                                    <tr>
+                                                        <th style="text-align: right">MAC:&nbsp;</th>
+                                                        <td>{{ mac }}</td>
+                                                    </tr>
+                                                {% endfor %}
+                                            </table>
+                                        </td>
+                                    </tr>
+                                {% endif %}
                             </table>
                         </td>
                     {% endfor %}
                 </tr>
             {% endfor %}
+
             </tbody>
         </table>
     </div>

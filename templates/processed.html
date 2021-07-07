@@ -14,8 +14,10 @@
         {% endwith %}
 
         {% with data = tcp_data %}
-            <h2>TCP Data</h2>
-            {% include 'processed_table.html' %}
+            {% with tcp = True  %}
+                <h2>TCP Data</h2>
+                {% include 'processed_table.html' %}
+            {% endwith %}
         {% endwith %}
     </div>
 {% endblock %}
