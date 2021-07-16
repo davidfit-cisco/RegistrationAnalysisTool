@@ -14,14 +14,22 @@ def process_csv(file_contents):
     column_indexes = process_title_row(readfile, main_data)
     tcp_data = deepcopy(main_data)
     closed_stores = get_closed_stores()
-    tcp_stores = get_tcp_stores()
+    if "tcp?" in column_indexes:
+        tcp_stores_from_file = None
+        print("'tcp?' column found in spreadsheet")
+    else:
+        tcp_stores_from_file = get_tcp_stores_from_file()
 
     for index, row in enumerate(list(readfile)):
         if is_open_dg_store(closed_stores, column_indexes, row):
             process_row(row, column_indexes, main_data)
 
-            if is_tcp_store(tcp_stores, column_indexes, row):
-                process_row(row, column_indexes, tcp_data, tcp_never_macs=tcp_never_macs)
+            if tcp_stores_from_file is not None:
+                if is_tcp_store(column_indexes, row, tcp_stores=tcp_stores_from_file):
+                    process_row(row, column_indexes, tcp_data, tcp_never_macs=tcp_never_macs)
+            else:
+                if is_tcp_store(column_indexes, row):
+                    process_row(row, column_indexes, tcp_data, tcp_never_macs=tcp_never_macs)
 
     return render_template('processed.html',
                            main_data=main_data, tcp_data=tcp_data,
@@ -80,7 +88,7 @@ def get_closed_stores(closed_stores_filename="Closed_DG_Stores_27_May.xlsx"):
     return [row[0].value for row in closed_sheet.rows if row[0].value]
 
 
-def get_tcp_stores(closed_stores_filename="TCP Conversion List 063021.xlsx"):
+def get_tcp_stores_from_file(closed_stores_filename="TCP Conversion List 063021.xlsx"):
     wb = openpyxl.load_workbook(os.path.join("docs", closed_stores_filename))
     tcp_sheet = wb["TCP Conversion List 063021"]
     return [row[0].value for row in tcp_sheet.rows if row[0].value]

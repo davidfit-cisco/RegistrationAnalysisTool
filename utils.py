@@ -56,5 +56,10 @@ def is_open_dg_store(closed_stores, column_indexes, row):
            and row[column_indexes["name1"]] not in closed_stores
 
 
-def is_tcp_store(tcp_stores, column_indexes, row):
-    return row[column_indexes["name1"]] in tcp_stores
+def is_tcp_store(column_indexes, row, tcp_stores=None):
+    if tcp_stores is not None:
+        return row[column_indexes["name1"]] in tcp_stores
+    elif "tcp?" in column_indexes:
+        return "tcp" in row[column_indexes["tcp?"]].lower()
+    else:
+        return False
