@@ -73,10 +73,14 @@ def initialise_day_data(day, device_type, data, tcp_never_macs=None):
 
 def process_title_row(readfile, data):
     title_row = next(readfile)
-
     column_indexes = {}
     for index, column_name in enumerate(title_row):
-        column_indexes[column_name.lower()] = index
+        if column_name.lower() == "sitename":
+            column_indexes["name1"] = index
+        elif column_name.lower() == "customer":
+            column_indexes["name2"] = index
+        else:
+            column_indexes[column_name.lower()] = index
         if is_date(column_name):
             add_date_to_data(index, column_name, data)
     return column_indexes
