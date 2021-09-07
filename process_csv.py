@@ -92,7 +92,7 @@ def get_closed_stores(closed_stores_filename="Closed_DG_Stores_27_May.xlsx"):
     return [row[0].value for row in closed_sheet.rows if row[0].value]
 
 
-def get_tcp_stores_from_file(closed_stores_filename="TCP Conversion List 063021.xlsx"):
+def get_tcp_stores_from_file(closed_stores_filename="TCP Conversion List 072921.xlsx"):
     wb = openpyxl.load_workbook(os.path.join("docs", closed_stores_filename))
     tcp_sheet = wb["TCP Conversion List 063021"]
     return [row[0].value for row in tcp_sheet.rows if row[0].value]
